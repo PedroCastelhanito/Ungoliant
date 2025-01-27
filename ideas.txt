@@ -1,0 +1,9 @@
+Check:
+
+Multi-scale Vesselness / “Tubularity” Filters
+Frangi Filter or Sato Filter: Often used in medical imaging to detect tubular or filamentous structures (e.g., blood vessels). These filters compute eigenvalues of the Hessian to detect “line-like” features. They can enhance filamentous structures against a noisy background.
+These filters work well in 3D, because they look for elongated intensity ridges in multiple orientations.
+
+3D Curve / Fiber Tracking
+You can perform a local tracing approach (similar to how one might do fiber tracking in diffusion MRI). The algorithm “follows” high-intensity ridges, bridging small gaps if orientation is consistent.
+Tubular Tracking: Start from high-confidence seed points, then use an iterative approach to follow the local orientation of the fiber. Where a small break is detected but orientation is continuous, you can “jump” a short distance if it meets length and direction constraints.
