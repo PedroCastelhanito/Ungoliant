@@ -1,13 +1,12 @@
 import os
+from typing import Optional, Union, List, Dict, Tuple, Any
+
 import h5py
 import numpy as np
 from PIL import Image
-from typing import Optional, Union, List, Dict, Tuple, Any
 
 
 class FileReader:
-    def __init__(self) -> None:
-        pass
 
     ###### * Main code * ######
 
@@ -135,10 +134,7 @@ class FileReader:
                     {', '.join(valid_extensions)}"
             )
 
-
 class FileWriter:
-    def __init__(self) -> None:
-        pass
 
     ###### * Main code * ######
 

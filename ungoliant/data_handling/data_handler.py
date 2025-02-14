@@ -1,12 +1,14 @@
 import os
+from typing import Tuple, Dict, Optional, Union, Any
+
 import cv2
 import h5py
 import numpy as np
 from datetime import datetime
 from scipy.signal import convolve
 from alive_progress import alive_bar
+
 from file_handler import FileReader, FileWriter
-from typing import Tuple, Dict, Optional, Union, Any
 
 
 class ImageProcessing:
@@ -28,9 +30,6 @@ class ImageProcessing:
 
     DEFAULT_MASK_FILENAME = "mask.png"
     DEFAULT_METHOD_ARGS = {"method": "metropolis", "temperature": 1}
-
-    def __init__(self) -> None:
-        pass
 
     ###### * Main code * ######
 
@@ -92,7 +91,7 @@ class ImageProcessing:
 
         # Apply single dimension contraction
         for _ in range(5):
-            adj_points = ImageProcessing.contractPointsAlongDimension(
+            adj_points = ImageProcessing.contract_points_along_dimension(
                 adj_points, 2, latticeSize=300, p=5
             )
 
@@ -439,7 +438,7 @@ class ImageProcessing:
         return adjusted_points, adjusted_imaged_indices
 
     @staticmethod
-    def courseGrainField(
+    def course_grain_field(
         points,
         values=None,
         latticeSpacing=None,
@@ -579,7 +578,7 @@ class ImageProcessing:
         return returnResult if len(returnResult) > 1 else convolution
 
     @staticmethod
-    def contractPointsAlongDimension(points, dim=0, p=1, latticeSize=100) -> np.ndarray:
+    def contract_points_along_dimension(points, dim=0, p=1, latticeSize=100) -> np.ndarray:
         """
         Contract a point cloud along one dimension by "peak-sharpening" its density.
 
@@ -598,7 +597,7 @@ class ImageProcessing:
             np.ndarray: A new array of the same shape as `points`, with updated coordinates
                         along the specified dimension.
         """
-        densityField, fieldSpacing, fieldCorner = ImageProcessing.courseGrainField(
+        densityField, fieldSpacing, fieldCorner = ImageProcessing.course_grain_field(
             points,
             defaultLatticeSize=latticeSize,
             returnSpacing=True,

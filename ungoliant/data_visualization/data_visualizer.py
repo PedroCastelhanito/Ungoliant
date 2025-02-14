@@ -1,5 +1,5 @@
+import open3d as o3d
 from matplotlib import pyplot as plt
-
 
 class Matplotlib:
 
@@ -34,3 +34,13 @@ class Matplotlib:
 
         # Display the plot
         plt.show()
+
+class Open3D:
+
+    def __init__(self) -> None:
+        pass
+
+    def plot_point_cloud(points):
+        pcd = o3d.geometry.PointCloud()
+        pcd.points = o3d.utility.Vector3dVector(points)
+        o3d.visualization.draw_geometries([pcd])
